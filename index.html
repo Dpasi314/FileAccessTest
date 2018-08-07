@@ -34,6 +34,14 @@
 
 <!-- Register Service Worker -->
 <script>
+if('serviceWorker' in navigator)
+{
+	window.addEventListener('load', () => {
+		navigator.serviceWorker.register('ServiceWorker.js', {
+				 scope: '/FileAccessTest/'
+				});
+			});
+}
 function getReadFile(reader, i) {
 	return () => {
  		var li = document.querySelector('[data-idx="' + i + '"]');
