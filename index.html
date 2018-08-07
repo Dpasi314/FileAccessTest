@@ -53,7 +53,12 @@ function getReadFile(reader, i) {
 	}
 }
 function generate() {
-	var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+	var blob = null;
+	if(navigator.userAgent.match('(iPhone)')) {
+ 		blob = new Blob(["Hello, world!"],  { type: "application/octet-stream"})		
+	} else {
+ 		blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+	}
 	saveAs(blob, "test.void");
 }
 function handleFiles(files) {
