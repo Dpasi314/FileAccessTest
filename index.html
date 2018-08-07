@@ -24,16 +24,20 @@
 	<body>
 		<div class="container">
 		<span class="btn btn-default btn-file">
-			Open <input type="file" onchange="handleFiles(this.files)" multiple/>
+			Open <input type="file" accept=".txt,.void,.md" onchange="handleFiles(this.files)" multiple/>
 		</span>
 
 		<ul id="target"></ul>
+
+		<button class='btn btn-default' onclick="generate()">Generate Random Code</button>
 		</div>
 	</body>
 </html>
 
 <!-- Register Service Worker -->
 <script>
+import { saveAs } from 'FilerSaver';
+
 if('serviceWorker' in navigator)
 {
 	window.addEventListener('load', () => {
@@ -48,7 +52,10 @@ function getReadFile(reader, i) {
 		li.innerHTML += 'File starts with "' + reader.result.substr(0,25) + '"';
 	}
 }
-
+function generate() {
+	var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+	saveAs(blob, "test.void");
+}
 function handleFiles(files) {
 	
 	var target = document.getElementById('target');
